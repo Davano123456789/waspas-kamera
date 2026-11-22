@@ -18,7 +18,7 @@
 
     <!-- Weight Preference Adjustment Form -->
     <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm p-6 lg:p-8">
-        <form action="{{ route('user.rekomendasi') }}" method="POST" class="space-y-6">
+        <form action="{{ route('user.rekomendasi') }}" method="POST" class="space-y-6" autocomplete="off">
             @csrf
 
             <div class="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -26,9 +26,9 @@
                     <h3 class="font-bold text-slate-800 text-base">Atur Prioritas Kriteria Penilaian</h3>
                     <p class="text-xs text-slate-400 font-medium">Beri nilai lebih tinggi pada kriteria yang paling penting bagi Anda</p>
                 </div>
-                <a href="{{ route('user.rekomendasi') }}" class="text-xs font-bold text-slate-500 hover:text-slate-900 transition flex items-center gap-1">
+                <button type="button" onclick="resetBobotStandar()" class="text-xs font-bold text-slate-500 hover:text-slate-900 transition flex items-center gap-1">
                     <i class="fa-solid fa-rotate-left"></i> Reset Ke Bobot Standar
-                </a>
+                </button>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -61,7 +61,9 @@
                                    max="100" 
                                    step="1" 
                                    name="bobot[{{ $kr->id }}]" 
-                                   value="{{ (int)$userVal }}" 
+                                   value="{{ (int)$userVal }}"
+                                   data-default="{{ (int)$kr->bobot }}"
+                                   data-label="valLabel_{{ $kr->id }}"
                                    oninput="document.getElementById('valLabel_{{ $kr->id }}').innerText = this.value" 
                                    class="w-full accent-slate-900 cursor-pointer">
                         </div>
@@ -78,4 +80,14 @@
     </div>
 
 </div>
+
+<script>
+    // Kembalikan semua slider ke bobot standar kriteria (dari tabel kriteria), tanpa reload halaman.
+    function resetBobotStandar() {
+        document.querySelectorAll('input[type="range"][data-default]').forEach(function (slider) {
+            slider.value = slider.dataset.default;
+            document.getElementById(slider.dataset.label).innerText = slider.value;
+        });
+    }
+</script>
 @endsection

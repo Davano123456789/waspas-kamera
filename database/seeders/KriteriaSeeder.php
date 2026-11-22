@@ -79,12 +79,13 @@ class KriteriaSeeder extends Seeder
                 ['nama' => '4K', 'nilai' => 2],
                 ['nama' => 'Full HD', 'nilai' => 1],
             ],
-            'C9' => [ // Harga - Rentang
-                ['nama' => '≤ Rp 5.000.000', 'nilai' => 5, 'min' => null, 'maks' => 5000000],
-                ['nama' => 'Rp 5.000.000 – Rp 10.000.000', 'nilai' => 4, 'min' => 5000001, 'maks' => 10000000],
+            'C9' => [ // Harga - Rentang. Atribut COST: skor naik searah harga (murah = 1, mahal = 5),
+                       // karena normalisasi cost (min / x) memberi nilai terbaik ke skor terkecil.
+                ['nama' => '≤ Rp 5.000.000', 'nilai' => 1, 'min' => null, 'maks' => 5000000],
+                ['nama' => 'Rp 5.000.000 – Rp 10.000.000', 'nilai' => 2, 'min' => 5000001, 'maks' => 10000000],
                 ['nama' => 'Rp 10.000.000 – Rp 20.000.000', 'nilai' => 3, 'min' => 10000001, 'maks' => 20000000],
-                ['nama' => 'Rp 20.000.000 – Rp 30.000.000', 'nilai' => 2, 'min' => 20000001, 'maks' => 30000000],
-                ['nama' => '> Rp 30.000.000', 'nilai' => 1, 'min' => 30000001, 'maks' => null],
+                ['nama' => 'Rp 20.000.000 – Rp 30.000.000', 'nilai' => 4, 'min' => 20000001, 'maks' => 30000000],
+                ['nama' => '> Rp 30.000.000', 'nilai' => 5, 'min' => 30000001, 'maks' => null],
             ],
         ];
 

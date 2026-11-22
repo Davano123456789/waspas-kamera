@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             WaspasSeeder::class,
             KriteriaSeeder::class,
+            EvaluasiSeeder::class,
         ]);
     }
 }
